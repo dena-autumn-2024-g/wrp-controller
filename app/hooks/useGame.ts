@@ -143,7 +143,7 @@ export default function useGame(client: any) {
     console.log("onArrowButtonTouchStart", direction);
   };
 
-  const handlePush = async ({
+  const handlePushButton = async ({
     userID,
     roomID,
   }: {
@@ -162,10 +162,32 @@ export default function useGame(client: any) {
       // レスポンスを保存
       console.log("Push Button Response:", response); // コンソールにレスポンスを表示
     } catch (error) {
-      console.error("Error calling Move:", error); // エラーハンドリング
+      console.error("Error calling Push Button:", error); // エラーハンドリング
     }
   };
 
+  const handleReleaseButton = async ({
+    userID,
+    roomID,
+  }: {
+    userID: number;
+    roomID: string;
+  }) => {
+    try {
+      const request = {
+        userId: userID,
+        roomId: roomID,
+      };
+
+      // Releaseメソッドを呼び出す
+      const response = await client.releaseButton(request);
+
+      // レスポンスを保存
+      console.log("Release Button Response:", response); // コンソールにレスポンスを表示
+    } catch (error) {
+      console.error("Error calling Release Button:", error); // エラーハンドリング
+    }
+  };
   const onMainButtonTouchStart = () => {
     if (!userID) {
       setError("userID is null");
@@ -179,10 +201,22 @@ export default function useGame(client: any) {
       userID: userID,
       roomID: roomID,
     };
-    handlePush({ ...request });
+    handlePushButton({ ...request });
   };
   const onMainButtonTouchEnd = () => {
-    console.log("onMainButtonTouchEnd");
+    if (!userID) {
+      setError("userID is null");
+      return;
+    }
+    if (!roomID) {
+      setError("roomID is null");
+      return;
+    }
+    const request = {
+      userID: userID,
+      roomID: roomID,
+    };
+    handleReleaseButton({ ...request });
   };
 
   return {
