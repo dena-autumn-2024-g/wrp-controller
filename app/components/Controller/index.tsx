@@ -3,6 +3,7 @@ import styles from "./component.module.css";
 import MainButton from "@/app/components/MainButton";
 import ArrowButton from "../ArrowButton";
 import DisplayPlayerName from "../DisplayPlayerName";
+import Direction from "@/app/types/Direction";
 
 export default function Controller({
   playerIndex,
@@ -29,10 +30,13 @@ export default function Controller({
           onTouchEnd={onMainButtonTouchEnd}
         />
         <div className={styles.arrowContainer}>
-          <ArrowButton onClick={onLeftArrowButtonTouchStart} direction="left" />
+          <ArrowButton
+            onClick={onLeftArrowButtonTouchStart}
+            direction={Direction.Left}
+          />
           <ArrowButton
             onClick={onRightArrowButtonTouchStart}
-            direction="right"
+            direction={Direction.Right}
           />
         </div>
         <DisplayPlayerName playerName="Player1" />

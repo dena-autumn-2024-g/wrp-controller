@@ -19,6 +19,7 @@ import Loading from "@/app/components/Loading";
 import Header from "@/app/components/Header";
 import Controller from "./components/Controller";
 import useGame from "@/app/hooks/useGame";
+import Direction from "@/app/types/Direction";
 
 export default function Home() {
   const { isLoading, error, playerIndex } = useGame();
@@ -75,7 +76,7 @@ export default function Home() {
   const onMainButtonTouchEnd = () => {
     console.log("onMainButtonTouchEnd");
   };
-  const onArrowButtonTouchStart = (direction: "left" | "right") => {
+  const onArrowButtonTouchStart = (direction: Direction) => {
     console.log("onArrowButtonTouchStart", direction);
   };
 
@@ -88,8 +89,12 @@ export default function Home() {
           playerIndex={playerIndex}
           onMainButtonTouchStart={onMainButtonTouchStart}
           onMainButtonTouchEnd={onMainButtonTouchEnd}
-          onLeftArrowButtonTouchStart={() => onArrowButtonTouchStart("left")}
-          onRightArrowButtonTouchStart={() => onArrowButtonTouchStart("right")}
+          onLeftArrowButtonTouchStart={() =>
+            onArrowButtonTouchStart(Direction.Left)
+          }
+          onRightArrowButtonTouchStart={() =>
+            onArrowButtonTouchStart(Direction.Right)
+          }
         />
         <button onClick={handleClick}>push</button>
         <ol>
