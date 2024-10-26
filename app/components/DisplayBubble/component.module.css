@@ -1,0 +1,30 @@
+.bubble {
+  z-index: -1;
+  position: absolute;
+  bottom: -100px;
+  background-color: transparent;
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.4);
+  animation: bubble 2s ease-in infinite;
+}
+
+/* 泡の一番明るい部分を疑似要素で表現 */
+.bubble::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: scale(0.25) translate(-70%, -70%);
+  background: radial-gradient(rgba(255, 255, 255, 0.8), transparent);
+  border-radius: 50%;
+}
+
+@keyframes bubble {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(40px, -120dvh);
+  }
+}
