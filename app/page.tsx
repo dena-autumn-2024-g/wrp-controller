@@ -22,7 +22,14 @@ const transport = createConnectTransport({
 const client = createPromiseClient(GameService, transport);
 
 export default function Home() {
-  const { isLoading, error, userID, onArrowButtonTouchStart } = useGame(client);
+  const {
+    isLoading,
+    error,
+    userID,
+    onArrowButtonTouchStart,
+    onMainButtonTouchStart,
+    onMainButtonTouchEnd,
+  } = useGame(client);
 
   const [bubbles, setBubbles] = useState<Bubble[]>([]); // 泡の状態を管理
 
@@ -58,6 +65,11 @@ export default function Home() {
     }
   };
 
+  const handleMainButtonTouchStart = () => {
+    onMainButtonTouchStart;
+    pushBubbles();
+  };
+
   if (isLoading) {
     return <Loading />;
   }
@@ -65,14 +77,6 @@ export default function Home() {
   if (error) {
     return <div className={styles.page}>{error}</div>;
   }
-
-  const onMainButtonTouchStart = () => {
-    pushBubbles();
-    console.log("onMainButtonTouchStart");
-  };
-  const onMainButtonTouchEnd = () => {
-    console.log("onMainButtonTouchEnd");
-  };
 
   return (
     <div className={styles.page}>
@@ -82,7 +86,7 @@ export default function Home() {
         <Controller
           userID={userID}
           bubbles={bubbles}
-          onMainButtonTouchStart={onMainButtonTouchStart}
+          onMainButtonTouchStart={handleMainButtonTouchStart}
           onMainButtonTouchEnd={onMainButtonTouchEnd}
           onLeftArrowButtonTouchStart={() =>
             onArrowButtonTouchStart(Direction.LEFT)

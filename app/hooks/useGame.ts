@@ -142,10 +142,19 @@ export default function useGame(client: any) {
     console.log("onArrowButtonTouchStart", direction);
   };
 
+  const onMainButtonTouchStart = () => {
+    console.log("onMainButtonTouchStart");
+  };
+  const onMainButtonTouchEnd = () => {
+    console.log("onMainButtonTouchEnd");
+  };
+
   return {
     isLoading,
     error,
     userID: userID || 0,
     onArrowButtonTouchStart,
+    onMainButtonTouchStart,
+    onMainButtonTouchEnd,
   };
 }
