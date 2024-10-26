@@ -8,13 +8,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   if (isLoading) {
-    return (
-      <div className={styles.page}>
-        <main className={styles.main}>
-          <Loading />
-        </main>
-      </div>
-    );
+    return <Loading />;
   }
 
   return (

@@ -4,9 +4,13 @@ import Logo from "@/app/components/Logo";
 
 export default function Loading() {
   return (
-    <div className={styles.loading}>
-      <Logo isLarge />
-      <p className={styles.p}>通信中...</p>
+    <div className={styles.page}>
+      <main className={styles.main}>
+        <div className={styles.loading}>
+          <Logo isLarge />
+          <p className={styles.p}>通信中...</p>
+        </div>
+      </main>
     </div>
   );
 }
