@@ -12,4 +12,7 @@
 
 .controller {
   background-color: var(--gray-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
