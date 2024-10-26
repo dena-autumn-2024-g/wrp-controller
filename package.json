@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@buf/connectrpc_eliza.connectrpc_es": "^1.4.0-20230913231627-233fca715f49.3",
+    "@bufbuild/protobuf": "^1.10.0",
     "@connectrpc/connect": "^1.6.1",
     "@connectrpc/connect-web": "^1.6.1",
     "next": "15.0.1",
