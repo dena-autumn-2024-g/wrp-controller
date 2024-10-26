@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import styles from "./component.module.css";
 import MainButton from "@/app/components/MainButton";
 import ArrowButton from "../ArrowButton";

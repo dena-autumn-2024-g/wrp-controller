@@ -6,6 +6,9 @@ export default function useGame() {
   const [roomID, setRoomID] = useState<string | null>(null);
   const [serverName, setServerName] = useState<string | null>(null);
   const [playerIndex, setPlayerIndex] = useState<number | null>(null);
+  console.log(
+    `[useGame] roomID:${roomID} serverName:${serverName} playerIndex:${playerIndex}`,
+  );
 
   useEffect(() => {
     const checkGameAlive = async (roomID: string, serverName: string) => {

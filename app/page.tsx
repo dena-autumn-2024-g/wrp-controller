@@ -17,11 +17,12 @@ const client = createPromiseClient(ElizaService, transport);
 import styles from "./page.module.css";
 import Loading from "@/app/components/Loading";
 import Header from "@/app/components/Header";
-import Controller from "./components/Controller";
+// import Controller from "./components/Controller";
 import useGame from "@/app/hooks/useGame";
 
 export default function Home() {
-  const { isLoading, error, playerIndex } = useGame();
+  // const { isLoading, error, playerIndex } = useGame();
+  const { isLoading, error } = useGame();
   const [inputValue, setInputValue] = useState("hogehoge");
   console.log(`inputValue: ${inputValue}`);
   const [messages, setMessages] = useState<
