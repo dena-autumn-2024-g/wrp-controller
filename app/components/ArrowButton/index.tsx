@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./component.module.css";
-import Direction from "@/app/types/Direction";
+import { Direction } from "@/src/gen/protobuf/game_pb";
 
 export default function ArrowButton({
   onTouchStart,
@@ -14,7 +14,7 @@ export default function ArrowButton({
       <button className={styles.button} onTouchStart={onTouchStart}>
         <div
           className={`${styles.arrow} ${
-            direction === Direction.Left ? styles.left : styles.right
+            direction === Direction.LEFT ? styles.left : styles.right
           }`}
         />
       </button>

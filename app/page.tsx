@@ -10,8 +10,8 @@ import Loading from "@/app/components/Loading";
 import Header from "@/app/components/Header";
 import Controller from "./components/Controller";
 import useGame from "@/app/hooks/useGame";
-import Direction from "@/app/types/Direction";
 import type Bubble from "@/app/types/Bubble";
+import { Direction } from "@/src/gen/protobuf/game_pb";
 
 // 接続先エンドポイントを設定
 const transport = createConnectTransport({
@@ -85,10 +85,10 @@ export default function Home() {
           onMainButtonTouchStart={onMainButtonTouchStart}
           onMainButtonTouchEnd={onMainButtonTouchEnd}
           onLeftArrowButtonTouchStart={() =>
-            onArrowButtonTouchStart(Direction.Left)
+            onArrowButtonTouchStart(Direction.LEFT)
           }
           onRightArrowButtonTouchStart={() =>
-            onArrowButtonTouchStart(Direction.Right)
+            onArrowButtonTouchStart(Direction.RIGHT)
           }
         />
       </main>

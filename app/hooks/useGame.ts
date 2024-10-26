@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import type Direction from "@/app/types/Direction";
+import { Direction } from "@/src/gen/protobuf/game_pb";
 
 export default function useGame(client: any) {
   const [isLoading, setIsLoading] = useState(true);
@@ -105,7 +105,7 @@ export default function useGame(client: any) {
     roomID,
   }: {
     userID: number;
-    direction: number;
+    direction: Direction;
     roomID: string;
   }) => {
     try {

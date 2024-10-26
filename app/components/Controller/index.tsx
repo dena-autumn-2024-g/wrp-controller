@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./component.module.css";
+import { Direction } from "@/src/gen/protobuf/game_pb";
 import MainButton from "@/app/components/MainButton";
 import ArrowButton from "@/app/components/ArrowButton";
 import DisplayPlayerName from "@/app/components/DisplayPlayerName";
-import Direction from "@/app/types/Direction";
 import DisplayBubble from "@/app/components/DisplayBubble";
 import type Bubble from "@/app/types/Bubble";
 
@@ -38,11 +38,11 @@ export default function Controller({
         <div className={styles.arrowContainer}>
           <ArrowButton
             onTouchStart={onLeftArrowButtonTouchStart}
-            direction={Direction.Left}
+            direction={Direction.LEFT}
           />
           <ArrowButton
             onTouchStart={onRightArrowButtonTouchStart}
-            direction={Direction.Right}
+            direction={Direction.RIGHT}
           />
         </div>
         <DisplayPlayerName playerName={`Player${userID + 1}`} />
