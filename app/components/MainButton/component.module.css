@@ -33,9 +33,7 @@
   width: 180px;
   height: 160px;
   transition: bottom 0.2s ease;
-  background-color: #0b7ad0;
   border-radius: 50%;
-  border: 4px solid var(--primary-dark);
 }
 
 .middleBox {
@@ -46,16 +44,12 @@
   width: 180px;
   height: 40px;
   transition: height 0.2s ease;
-  background-color: var(--primary-dark);
-  border: 4px solid var(--primary-dark);
 }
 
 .bottomCircle {
   width: 180px;
   height: 160px;
-  background-color: var(--primary-dark);
   border-radius: 50%;
-  border: 4px solid var(--primary-dark);
 }
 
 /* クリック時の凹みエフェクト */
@@ -73,7 +67,5 @@
   left: -15px;
   right: -15px;
   height: 175px;
-  background-color: #0b7ad0;
   border-radius: 50%;
-  border: 4px solid var(--primary-dark);
 }
