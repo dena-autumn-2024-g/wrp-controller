@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Direction, PushButtonRequest } from "@/src/gen/protobuf/game_pb";
+import { Direction } from "@/src/gen/protobuf/game_pb";
 
 export default function useGame(client: any) {
   const [isLoading, setIsLoading] = useState(true);
