@@ -169,6 +169,8 @@ export default function useGame(gameClient: any, roomClient: any) {
         roomId: roomID,
       };
 
+      console.log("Push Button Request:", request); // コンソールにリクエストを表示
+
       // TODO: errorはいてる
       const response = await gameClient.pushButton(request);
 
