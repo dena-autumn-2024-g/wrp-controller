@@ -1,0 +1,63 @@
+/* component.module.css */
+
+.button {
+  background: none;
+  border: none;
+  border-radius: 5px;
+  padding: 0;
+  /* button effect 消す */
+  outline: none;
+  position: relative;
+  -webkit-tap-highlight-color: transparent; /* モバイルでのハイライトを無効化 */
+  user-select: none; /* テキスト選択を無効化 */
+}
+
+.topCircle,
+.middleBox,
+.bottomCircle {
+  user-select: none; /* 各要素も選択できないように設定 */
+}
+
+.topCircle {
+  z-index: 2;
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  right: 0;
+  width: 180px;
+  height: 160px;
+  transition: bottom 0.2s ease;
+  background-color: #0b7ad0;
+  border-radius: 50%;
+  border: 4px solid var(--primary-dark);
+}
+
+.middleBox {
+  z-index: 1;
+  position: absolute;
+  bottom: 80px;
+  left: 0;
+  right: 0;
+  width: 180px;
+  height: 40px;
+  transition: height 0.2s ease;
+  background-color: var(--primary-dark);
+  border: 4px solid var(--primary-dark);
+}
+
+.bottomCircle {
+  width: 180px;
+  height: 160px;
+  background-color: var(--primary-dark);
+  border-radius: 50%;
+  border: 4px solid var(--primary-dark);
+}
+
+/* クリック時の凹みエフェクト */
+.button:active .topCircle {
+  bottom: 10px;
+}
+
+.button:active .middleBox {
+  height: 10px;
+}
