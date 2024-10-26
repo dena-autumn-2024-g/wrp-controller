@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Jaro, DotGothic16 } from "next/font/google";
 import "./globals.css";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+const JaroFont = Jaro({
+  weight: "400",
+  subsets: ["latin"],
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+
+const DotGothic16Font = DotGothic16({
+  weight: "400",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -25,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${JaroFont.className} ${DotGothic16Font.className}`}>
         {children}
       </body>
     </html>
