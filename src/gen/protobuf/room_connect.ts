@@ -12,7 +12,8 @@ import {
   JoinRoomResponse,
   WaitForUserJoinRequest,
   WaitForUserJoinResponse,
-} from "./room_pb.js";
+  // TODO: ts.jsが間違っている
+} from "./room_pb.ts";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**

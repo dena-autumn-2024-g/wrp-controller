@@ -4,6 +4,7 @@ import { createPromiseClient } from "@connectrpc/connect";
 import { createConnectTransport } from "@connectrpc/connect-web";
 
 import { GameService } from "@/src/gen/protobuf/game_connect";
+import { RoomService } from "@/src/gen/protobuf/room_connect";
 
 import styles from "./page.module.css";
 import Loading from "@/app/components/Loading";
@@ -19,7 +20,8 @@ const transport = createConnectTransport({
 });
 
 // クライアントの作成
-const client = createPromiseClient(GameService, transport);
+const gameClient = createPromiseClient(GameService, transport);
+const roomClient = createPromiseClient(RoomService, transport);
 
 export default function Home() {
   const {
@@ -29,7 +31,7 @@ export default function Home() {
     onArrowButtonTouchStart,
     onMainButtonTouchStart,
     onMainButtonTouchEnd,
-  } = useGame(client);
+  } = useGame(gameClient, roomClient);
 
   const [bubbles, setBubbles] = useState<Bubble[]>([]); // 泡の状態を管理
 

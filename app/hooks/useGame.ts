@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Direction } from "@/src/gen/protobuf/game_pb";
 
-export default function useGame(client: any) {
+export default function useGame(gameClient: any, roomClient: any) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [roomID, setRoomID] = useState<string | null>(null);
@@ -12,17 +12,23 @@ export default function useGame(client: any) {
   );
 
   useEffect(() => {
-    const checkGameAlive = async (roomID: string, serverName: string) => {
-      // const response = await fetch(
-      //   `https://api.sample.com/check?roomID=${roomID}`
-      // );
-      // const data = await response.json();
-      // console.log("checkGameAlive", data);
-      console.log(`[checkGameAlive] roomID:${roomID} serverName:${serverName}`);
-      const data = { isAlive: true };
-      const isAlive = data.isAlive;
+    const checkGameIsAlive = async (roomID: string, serverName: string) => {
+      try {
+        const request = {
+          roomId: roomID,
+          serverName: serverName,
+        };
+        // TODO: checkGameAliveメソッドを作る
+        // const response = await gameClient.checkGameAlive(request);
+        const response = { isAlive: true };
+        console.log("Check Game Alive Response:", response);
+        const isAlive = response.isAlive;
 
-      return isAlive;
+        return isAlive;
+      } catch (error) {
+        console.error("Error calling checkGameAlive:", error);
+        setError("Error calling checkGameAlive");
+      }
     };
 
     const registerPlayer = async (roomID: string, serverName: string) => {
@@ -57,7 +63,7 @@ export default function useGame(client: any) {
         return;
       }
 
-      const isGameAlive = await checkGameAlive(paramRoomID, paramServerName);
+      const isGameAlive = await checkGameIsAlive(paramRoomID, paramServerName);
       if (!isGameAlive) {
         setIsLoading(false);
         setError("Game is not alive");
@@ -116,7 +122,7 @@ export default function useGame(client: any) {
       };
 
       // Moveメソッドを呼び出す
-      const response = await client.move(request);
+      const response = await gameClient.move(request);
 
       // レスポンスを保存
       console.log("Move Response:", response); // コンソールにレスポンスを表示
@@ -158,7 +164,7 @@ export default function useGame(client: any) {
       };
 
       // TODO: errorはいてる
-      const response = await client.pushButton(request);
+      const response = await gameClient.pushButton(request);
 
       // レスポンスを保存
       console.log("Push Button Response:", response); // コンソールにレスポンスを表示
@@ -182,7 +188,7 @@ export default function useGame(client: any) {
       };
 
       // Releaseメソッドを呼び出す
-      const response = await client.releaseButton(request);
+      const response = await gameClient.releaseButton(request);
 
       // レスポンスを保存
       console.log("Release Button Response:", response); // コンソールにレスポンスを表示
