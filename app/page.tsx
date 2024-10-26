@@ -96,14 +96,14 @@ export default function Home() {
             onArrowButtonTouchStart(Direction.Right)
           }
         />
-        <button onClick={handleClick}>push</button>
-        <ol>
+        {/* <button onClick={handleClick}>push</button> */}
+        {/* <ol>
           {messages.map((msg, index) => (
             <li key={index}>
               {`${msg.fromMe ? "ME:" : "ELIZA:"} ${msg.message}`}
             </li>
           ))}
-        </ol>
+        </ol> */}
       </main>
     </div>
   );

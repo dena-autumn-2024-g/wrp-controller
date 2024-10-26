@@ -18,7 +18,11 @@ body {
   margin: 0;
   line-height: 1.5;
   color: var(--primary-dark);
-  background-color: var(--primary-light);
+  background: linear-gradient(
+    180deg,
+    var(--primary-light) 0%,
+    var(--primary-dark) 100%
+  );
   overflow: hidden;
 }
 
