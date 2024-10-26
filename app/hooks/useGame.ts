@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Direction } from "@/src/gen/protobuf/game_pb";
+import { Direction, PushButtonRequest } from "@/src/gen/protobuf/game_pb";
 
 export default function useGame(client: any) {
   const [isLoading, setIsLoading] = useState(true);
@@ -134,16 +134,52 @@ export default function useGame(client: any) {
       setError("roomID is null");
       return;
     }
-    handleMove({
+    const request = {
       userID: userID,
-      direction: 0,
+      direction: direction,
       roomID: roomID,
-    });
+    };
+    handleMove({ ...request });
     console.log("onArrowButtonTouchStart", direction);
   };
 
+  const handlePush = async ({
+    userID,
+    roomID,
+  }: {
+    userID: number;
+    roomID: string;
+  }) => {
+    try {
+      const request = {
+        userId: userID,
+        roomId: roomID,
+      };
+
+      // TODO: errorはいてる
+      const response = await client.pushButton(request);
+
+      // レスポンスを保存
+      console.log("Push Button Response:", response); // コンソールにレスポンスを表示
+    } catch (error) {
+      console.error("Error calling Move:", error); // エラーハンドリング
+    }
+  };
+
   const onMainButtonTouchStart = () => {
-    console.log("onMainButtonTouchStart");
+    if (!userID) {
+      setError("userID is null");
+      return;
+    }
+    if (!roomID) {
+      setError("roomID is null");
+      return;
+    }
+    const request = {
+      userID: userID,
+      roomID: roomID,
+    };
+    handlePush({ ...request });
   };
   const onMainButtonTouchEnd = () => {
     console.log("onMainButtonTouchEnd");

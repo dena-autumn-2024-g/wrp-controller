@@ -66,7 +66,7 @@ export default function Home() {
   };
 
   const handleMainButtonTouchStart = () => {
-    onMainButtonTouchStart;
+    onMainButtonTouchStart();
     pushBubbles();
   };
 
