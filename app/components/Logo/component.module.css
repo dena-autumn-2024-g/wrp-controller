@@ -1,0 +1,47 @@
+/* component.module.css */
+.h1Container {
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+}
+
+.h1 {
+  margin: 0;
+  font-family: "Jaro", sans-serif;
+  font-size: 2rem;
+  color: var(--primary-light);
+}
+
+.h1Large {
+  font-size: 3rem;
+}
+
+.strokeShadow {
+  margin: 0;
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  font-size: 2rem;
+  font-family: "Jaro", sans-serif;
+  -webkit-text-stroke: 8px var(--primary-dark);
+}
+
+.strokeShadowLarge {
+  -webkit-text-stroke: 12px var(--primary-dark);
+  font-size: 3rem;
+}
+
+.shadow {
+  position: absolute;
+  top: 1rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  width: 100%;
+  background-color: var(--primary-dark);
+}
+
+.shadowLarge {
+  top: 1.7rem;
+}
