@@ -22,7 +22,7 @@ const transport = createConnectTransport({
 const client = createPromiseClient(GameService, transport);
 
 export default function Home() {
-  const { isLoading, error, userID } = useGame();
+  const { isLoading, error, userID, onArrowButtonTouchStart } = useGame(client);
 
   const [bubbles, setBubbles] = useState<Bubble[]>([]); // 泡の状態を管理
 
@@ -66,46 +66,12 @@ export default function Home() {
     return <div className={styles.page}>{error}</div>;
   }
 
-  const handleMove = async ({
-    userID,
-    direction,
-    roomID,
-  }: {
-    userID: number;
-    direction: number;
-    roomID: string;
-  }) => {
-    try {
-      const request = {
-        userId: userID,
-        direction: direction,
-        roomId: roomID,
-      };
-
-      // Moveメソッドを呼び出す
-      const response = await client.move(request);
-
-      // レスポンスを保存
-      console.log("Move Response:", response); // コンソールにレスポンスを表示
-    } catch (error) {
-      console.error("Error calling Move:", error); // エラーハンドリング
-    }
-  };
-
   const onMainButtonTouchStart = () => {
     pushBubbles();
     console.log("onMainButtonTouchStart");
   };
   const onMainButtonTouchEnd = () => {
     console.log("onMainButtonTouchEnd");
-  };
-  const onArrowButtonTouchStart = (direction: Direction) => {
-    handleMove({
-      userID: userID,
-      direction: 0,
-      roomID: "1120",
-    });
-    console.log("onArrowButtonTouchStart", direction);
   };
 
   return (

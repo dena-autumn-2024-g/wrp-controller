@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
+import type Direction from "@/app/types/Direction";
 
-export default function useGame() {
+export default function useGame(client: any) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [roomID, setRoomID] = useState<string | null>(null);
@@ -98,9 +99,53 @@ export default function useGame() {
     initialize();
   }, [setIsLoading, setError, setRoomID, setServerName, setUserID]);
 
+  const handleMove = async ({
+    userID,
+    direction,
+    roomID,
+  }: {
+    userID: number;
+    direction: number;
+    roomID: string;
+  }) => {
+    try {
+      const request = {
+        userId: userID,
+        direction: direction,
+        roomId: roomID,
+      };
+
+      // Moveメソッドを呼び出す
+      const response = await client.move(request);
+
+      // レスポンスを保存
+      console.log("Move Response:", response); // コンソールにレスポンスを表示
+    } catch (error) {
+      console.error("Error calling Move:", error); // エラーハンドリング
+    }
+  };
+
+  const onArrowButtonTouchStart = (direction: Direction) => {
+    if (!userID) {
+      setError("userID is null");
+      return;
+    }
+    if (!roomID) {
+      setError("roomID is null");
+      return;
+    }
+    handleMove({
+      userID: userID,
+      direction: 0,
+      roomID: roomID,
+    });
+    console.log("onArrowButtonTouchStart", direction);
+  };
+
   return {
     isLoading,
     error,
     userID: userID || 0,
+    onArrowButtonTouchStart,
   };
 }
