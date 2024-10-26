@@ -17,12 +17,11 @@ const client = createPromiseClient(ElizaService, transport);
 import styles from "./page.module.css";
 import Loading from "@/app/components/Loading";
 import Header from "@/app/components/Header";
-// import Controller from "./components/Controller";
+import Controller from "./components/Controller";
 import useGame from "@/app/hooks/useGame";
 
 export default function Home() {
-  // const { isLoading, error, playerIndex } = useGame();
-  const { isLoading, error } = useGame();
+  const { isLoading, error, playerIndex } = useGame();
   const [inputValue, setInputValue] = useState("hogehoge");
   console.log(`inputValue: ${inputValue}`);
   const [messages, setMessages] = useState<
@@ -70,12 +69,28 @@ export default function Home() {
     console.log(response);
   };
 
+  const onMainButtonTouchStart = () => {
+    console.log("onMainButtonTouchStart");
+  };
+  const onMainButtonTouchEnd = () => {
+    console.log("onMainButtonTouchEnd");
+  };
+  const onArrowButtonTouchStart = (direction: "left" | "right") => {
+    console.log("onArrowButtonTouchStart", direction);
+  };
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
         <Header />
 
-        {/* <Controller playerIndex={playerIndex} /> */}
+        <Controller
+          playerIndex={playerIndex}
+          onMainButtonTouchStart={onMainButtonTouchStart}
+          onMainButtonTouchEnd={onMainButtonTouchEnd}
+          onLeftArrowButtonTouchStart={() => onArrowButtonTouchStart("left")}
+          onRightArrowButtonTouchStart={() => onArrowButtonTouchStart("right")}
+        />
         <button onClick={handleClick}>push</button>
         <ol>
           {messages.map((msg, index) => (

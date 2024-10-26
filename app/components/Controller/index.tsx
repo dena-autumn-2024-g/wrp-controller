@@ -4,7 +4,19 @@ import MainButton from "@/app/components/MainButton";
 import ArrowButton from "../ArrowButton";
 import DisplayPlayerName from "../DisplayPlayerName";
 
-export default function Controller({ playerIndex }: { playerIndex: number }) {
+export default function Controller({
+  playerIndex,
+  onMainButtonTouchStart,
+  onMainButtonTouchEnd,
+  onLeftArrowButtonTouchStart,
+  onRightArrowButtonTouchStart,
+}: {
+  playerIndex: number;
+  onMainButtonTouchStart: () => void;
+  onMainButtonTouchEnd: () => void;
+  onLeftArrowButtonTouchStart: () => void;
+  onRightArrowButtonTouchStart: () => void;
+}) {
   console.log("playerIndex", playerIndex);
 
   return (
@@ -13,15 +25,13 @@ export default function Controller({ playerIndex }: { playerIndex: number }) {
       <div className={styles.controller}>
         <MainButton
           playerIndex={playerIndex}
-          onClick={() => console.log("main clicked")}
+          onTouchStart={onMainButtonTouchStart}
+          onTouchEnd={onMainButtonTouchEnd}
         />
         <div className={styles.arrowContainer}>
+          <ArrowButton onClick={onLeftArrowButtonTouchStart} direction="left" />
           <ArrowButton
-            onClick={() => console.log("left clicked")}
-            direction="left"
-          />
-          <ArrowButton
-            onClick={() => console.log("right clicked")}
+            onClick={onRightArrowButtonTouchStart}
             direction="right"
           />
         </div>
