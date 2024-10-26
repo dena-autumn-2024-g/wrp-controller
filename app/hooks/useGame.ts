@@ -127,6 +127,8 @@ export default function useGame(gameClient: any, roomClient: any) {
         roomId: roomID,
       };
 
+      console.log("Move Request:", request); // コンソールにリクエストを表示
+
       // Moveメソッドを呼び出す
       const response = await gameClient.move(request);
 
@@ -139,7 +141,7 @@ export default function useGame(gameClient: any, roomClient: any) {
   };
 
   const onArrowButtonTouchStart = (direction: Direction) => {
-    if (!userID) {
+    if (userID === null) {
       setError("userID is null");
       return;
     }
@@ -206,7 +208,7 @@ export default function useGame(gameClient: any, roomClient: any) {
     }
   };
   const onMainButtonTouchStart = () => {
-    if (!userID) {
+    if (userID === null) {
       setError("userID is null");
       return;
     }
@@ -221,7 +223,7 @@ export default function useGame(gameClient: any, roomClient: any) {
     handlePushButton({ ...request });
   };
   const onMainButtonTouchEnd = () => {
-    if (!userID) {
+    if (userID === null) {
       setError("userID is null");
       return;
     }
