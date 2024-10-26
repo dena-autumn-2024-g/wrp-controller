@@ -39,7 +39,7 @@ export default function Controller({
             direction={Direction.Right}
           />
         </div>
-        <DisplayPlayerName playerName="Player1" />
+        <DisplayPlayerName playerName={`Player${playerIndex}`} />
       </div>
     </div>
   );
