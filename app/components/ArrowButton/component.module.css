@@ -1,0 +1,49 @@
+/* component.module.css */
+.container {
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+}
+
+.button {
+  z-index: 5;
+  background: none;
+  border: none;
+  border-radius: 5px;
+  padding: 0;
+  /* button effect 消す */
+  outline: none;
+  position: relative;
+  -webkit-tap-highlight-color: transparent; /* モバイルでのハイライトを無効化 */
+  user-select: none; /* テキスト選択を無効化 */
+}
+
+.arrow {
+  user-select: none; /* 各要素も選択できないように設定 */
+  z-index: 10;
+  width: 60px;
+  height: 80px;
+  transition: bottom 0.2s ease;
+  background-color: var(--secondary);
+}
+.button:active .arrow {
+  background-color: #de4f07;
+}
+
+.right {
+  /* 左向き三角形 */
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+.left {
+  /* 右向き三角形 */
+  clip-path: polygon(100% 0, 0 50%, 100% 100%);
+}
+
+/* クリック時の凹みエフェクト */
+.button:active .topCircle {
+  bottom: 10px;
+}
+
+.button:active .middleBox {
+  height: 10px;
+}

@@ -13,6 +13,16 @@
 .controller {
   background-color: var(--gray-light);
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.arrowContainer {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
 }
