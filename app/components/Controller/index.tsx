@@ -31,11 +31,11 @@ export default function Controller({
         />
         <div className={styles.arrowContainer}>
           <ArrowButton
-            onClick={onLeftArrowButtonTouchStart}
+            onTouchStart={onLeftArrowButtonTouchStart}
             direction={Direction.Left}
           />
           <ArrowButton
-            onClick={onRightArrowButtonTouchStart}
+            onTouchStart={onRightArrowButtonTouchStart}
             direction={Direction.Right}
           />
         </div>

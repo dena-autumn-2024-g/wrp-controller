@@ -3,15 +3,15 @@ import styles from "./component.module.css";
 import Direction from "@/app/types/Direction";
 
 export default function ArrowButton({
-  onClick,
+  onTouchStart,
   direction,
 }: {
-  onClick: () => void;
+  onTouchStart: () => void;
   direction: Direction;
 }) {
   return (
     <div className={styles.container}>
-      <button className={styles.button} onClick={onClick}>
+      <button className={styles.button} onTouchStart={onTouchStart}>
         <div
           className={`${styles.arrow} ${
             direction === Direction.Left ? styles.left : styles.right
