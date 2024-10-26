@@ -5,11 +5,7 @@ import MainButton from "@/app/components/MainButton";
 import ArrowButton from "../ArrowButton";
 import DisplayPlayerName from "../DisplayPlayerName";
 
-export default function Controller() {
-  const [playerIndex, setPlayerIndex] = useState(0);
-  const onClick = () => {
-    setPlayerIndex((prev) => (prev + 1) % 10);
-  };
+export default function Controller({ playerIndex }: { playerIndex: number }) {
   console.log("playerIndex", playerIndex);
 
   return (
@@ -25,7 +21,10 @@ export default function Controller() {
             onClick={() => console.log("left clicked")}
             direction="left"
           />
-          <ArrowButton onClick={onClick} direction="right" />
+          <ArrowButton
+            onClick={() => console.log("right clicked")}
+            direction="right"
+          />
         </div>
         <DisplayPlayerName playerName="Player1" />
       </div>

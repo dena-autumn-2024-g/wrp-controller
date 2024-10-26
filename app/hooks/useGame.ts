@@ -95,5 +95,9 @@ export default function useGame() {
     initialize();
   }, [setIsLoading, setError, setRoomID, setServerName, setPlayerIndex]);
 
-  return { isLoading, error, roomID, serverName, playerIndex };
+  return {
+    isLoading,
+    error,
+    playerIndex: playerIndex || 0,
+  };
 }

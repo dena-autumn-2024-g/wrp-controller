@@ -6,7 +6,7 @@ import Controller from "./components/Controller";
 import useGame from "@/app/hooks/useGame";
 
 export default function Home() {
-  const { isLoading, error, roomID, serverName, playerIndex } = useGame();
+  const { isLoading, error, playerIndex } = useGame();
 
   if (isLoading) {
     return <Loading />;
@@ -21,7 +21,7 @@ export default function Home() {
       <main className={styles.main}>
         <Header />
 
-        <Controller />
+        <Controller playerIndex={playerIndex} />
       </main>
     </div>
   );
