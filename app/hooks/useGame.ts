@@ -122,6 +122,7 @@ export default function useGame(client: any) {
       console.log("Move Response:", response); // コンソールにレスポンスを表示
     } catch (error) {
       console.error("Error calling Move:", error); // エラーハンドリング
+      setError("Error calling Move");
     }
   };
 
@@ -163,6 +164,7 @@ export default function useGame(client: any) {
       console.log("Push Button Response:", response); // コンソールにレスポンスを表示
     } catch (error) {
       console.error("Error calling Push Button:", error); // エラーハンドリング
+      setError("Error calling Push Button");
     }
   };
 
@@ -186,6 +188,7 @@ export default function useGame(client: any) {
       console.log("Release Button Response:", response); // コンソールにレスポンスを表示
     } catch (error) {
       console.error("Error calling Release Button:", error); // エラーハンドリング
+      setError("Error calling Release Button");
     }
   };
   const onMainButtonTouchStart = () => {
