@@ -3,16 +3,16 @@ import { useState } from "react";
 import { createPromiseClient } from "@connectrpc/connect";
 import { createConnectTransport } from "@connectrpc/connect-web";
 
-// ElizaService のインポート
-import { ElizaService } from "@buf/connectrpc_eliza.connectrpc_es/connectrpc/eliza/v1/eliza_connect";
+// GameService のインポート
+import { GameService } from "@/src/gen/protobuf/game_connect";
 
 // 接続先エンドポイントを設定
 const transport = createConnectTransport({
-  baseUrl: "https://demo.connectrpc.com",
+  baseUrl: process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000",
 });
 
 // クライアントの作成
-const client = createPromiseClient(ElizaService, transport);
+const client = createPromiseClient(GameService, transport);
 
 import styles from "./page.module.css";
 import Loading from "@/app/components/Loading";
@@ -25,14 +25,12 @@ import type Bubble from "@/app/types/Bubble";
 export default function Home() {
   const { isLoading, error, playerIndex } = useGame();
   const [inputValue, setInputValue] = useState("hogehoge");
-  console.log(`inputValue: ${inputValue}`);
   const [messages, setMessages] = useState<
     {
       fromMe: boolean;
       message: string;
     }[]
   >([]);
-  console.log(`messages: ${messages}`);
 
   const [bubbles, setBubbles] = useState<Bubble[]>([]); // 泡の状態を管理
 
@@ -76,34 +74,60 @@ export default function Home() {
     return <div className={styles.page}>{error}</div>;
   }
 
-  const handleClick = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) => {
-    e.preventDefault();
-    // Clear inputValue since the user has submitted.
-    setInputValue("");
-    // Store the inputValue in the chain of messages and
-    // mark this message as coming from "me"
-    setMessages((prev) => [
-      ...prev,
-      {
-        fromMe: true,
-        message: inputValue,
-      },
-    ]);
-    const response = await client.say({
-      sentence: inputValue,
-    });
-    setMessages((prev) => [
-      ...prev,
-      {
-        fromMe: false,
-        message: response.sentence,
-      },
-    ]);
+  const handleMove = async ({
+    userID,
+    direction,
+    roomID,
+  }: {
+    userID: number;
+    direction: number;
+    roomID: string;
+  }) => {
+    try {
+      const request = {
+        userId: userID,
+        direction: direction,
+        roomId: roomID,
+      };
 
-    console.log(response);
+      // Moveメソッドを呼び出す
+      const response = await client.move(request);
+
+      // レスポンスを保存
+      console.log("Move Response:", response); // コンソールにレスポンスを表示
+    } catch (error) {
+      console.error("Error calling Move:", error); // エラーハンドリング
+    }
   };
+
+  // const handleClick = async (
+  //   e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  // ) => {
+  //   e.preventDefault();
+  //   // Clear inputValue since the user has submitted.
+  //   setInputValue("");
+  //   // Store the inputValue in the chain of messages and
+  //   // mark this message as coming from "me"
+  //   setMessages((prev) => [
+  //     ...prev,
+  //     {
+  //       fromMe: true,
+  //       message: inputValue,
+  //     },
+  //   ]);
+  //   const response = await client.say({
+  //     sentence: inputValue,
+  //   });
+  //   setMessages((prev) => [
+  //     ...prev,
+  //     {
+  //       fromMe: false,
+  //       message: response.sentence,
+  //     },
+  //   ]);
+
+  //   console.log(response);
+  // };
 
   const onMainButtonTouchStart = () => {
     pushBubbles();
@@ -113,6 +137,11 @@ export default function Home() {
     console.log("onMainButtonTouchEnd");
   };
   const onArrowButtonTouchStart = (direction: Direction) => {
+    handleMove({
+      userID: playerIndex,
+      direction: 0,
+      roomID: "1120",
+    });
     console.log("onArrowButtonTouchStart", direction);
   };
 
@@ -133,8 +162,8 @@ export default function Home() {
             onArrowButtonTouchStart(Direction.Right)
           }
         />
-        {/* <button onClick={handleClick}>push</button> */}
-        {/* <ol>
+        {/* <button onClick={handleClick}>push</button>
+        <ol>
           {messages.map((msg, index) => (
             <li key={index}>
               {`${msg.fromMe ? "ME:" : "ELIZA:"} ${msg.message}`}
