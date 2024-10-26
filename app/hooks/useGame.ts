@@ -5,9 +5,9 @@ export default function useGame() {
   const [error, setError] = useState<string | null>(null);
   const [roomID, setRoomID] = useState<string | null>(null);
   const [serverName, setServerName] = useState<string | null>(null);
-  const [playerIndex, setPlayerIndex] = useState<number | null>(null);
+  const [userID, setUserID] = useState<number | null>(null);
   console.log(
-    `[useGame] roomID:${roomID} serverName:${serverName} playerIndex:${playerIndex}`,
+    `[useGame] roomID:${roomID} serverName:${serverName} userID:${userID}`,
   );
 
   useEffect(() => {
@@ -31,11 +31,11 @@ export default function useGame() {
       // const data = await response.json();
       // console.log("registerPlayer", data);
       console.log(`[registerPlayer] roomID:${roomID} serverName:${serverName}`);
-      const data = { playerIndex: 1 };
-      const playerIndex = data.playerIndex;
+      const data = { userID: 1 };
+      const userID = data.userID;
       localStorage.setItem("roomID", roomID);
-      localStorage.setItem("playerIndex", playerIndex.toString());
-      return playerIndex;
+      localStorage.setItem("userID", userID.toString());
+      return userID;
     };
 
     const initialize = async () => {
@@ -65,15 +65,15 @@ export default function useGame() {
 
       // localStorageから情報を取得
       const storedRoomID = localStorage.getItem("roomID");
-      const storedPlayerIndexString = localStorage.getItem("playerIndex");
-      const storedPlayerIndex = storedPlayerIndexString
-        ? parseInt(storedPlayerIndexString)
+      const storedUserIDString = localStorage.getItem("userID");
+      const storedUserID = storedUserIDString
+        ? parseInt(storedUserIDString)
         : null;
 
-      if (storedRoomID === paramRoomID && storedPlayerIndex !== null) {
+      if (storedRoomID === paramRoomID && storedUserID !== null) {
         setRoomID(paramRoomID);
         setServerName(paramServerName);
-        setPlayerIndex(storedPlayerIndex);
+        setUserID(storedUserID);
         setIsLoading(false);
         return;
       }
@@ -91,16 +91,16 @@ export default function useGame() {
 
       setRoomID(paramRoomID);
       setServerName(paramServerName);
-      setPlayerIndex(fetchedPlayerID);
+      setUserID(fetchedPlayerID);
       setIsLoading(false);
     };
 
     initialize();
-  }, [setIsLoading, setError, setRoomID, setServerName, setPlayerIndex]);
+  }, [setIsLoading, setError, setRoomID, setServerName, setUserID]);
 
   return {
     isLoading,
     error,
-    playerIndex: playerIndex || 0,
+    userID: userID || 0,
   };
 }

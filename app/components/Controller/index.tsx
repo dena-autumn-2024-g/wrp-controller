@@ -8,14 +8,14 @@ import DisplayBubble from "@/app/components/DisplayBubble";
 import type Bubble from "@/app/types/Bubble";
 
 export default function Controller({
-  playerIndex,
+  userID,
   bubbles,
   onMainButtonTouchStart,
   onMainButtonTouchEnd,
   onLeftArrowButtonTouchStart,
   onRightArrowButtonTouchStart,
 }: {
-  playerIndex: number;
+  userID: number;
   bubbles: Bubble[];
   onMainButtonTouchStart: () => void;
   onMainButtonTouchEnd: () => void;
@@ -31,7 +31,7 @@ export default function Controller({
       </div>
       <div className={styles.controller}>
         <MainButton
-          playerIndex={playerIndex}
+          userID={userID}
           onTouchStart={onMainButtonTouchStart}
           onTouchEnd={onMainButtonTouchEnd}
         />
@@ -45,7 +45,7 @@ export default function Controller({
             direction={Direction.Right}
           />
         </div>
-        <DisplayPlayerName playerName={`Player${playerIndex}`} />
+        <DisplayPlayerName playerName={`Player${userID + 1}`} />
       </div>
     </div>
   );

@@ -22,7 +22,7 @@ const transport = createConnectTransport({
 const client = createPromiseClient(GameService, transport);
 
 export default function Home() {
-  const { isLoading, error, playerIndex } = useGame();
+  const { isLoading, error, userID } = useGame();
 
   const [bubbles, setBubbles] = useState<Bubble[]>([]); // 泡の状態を管理
 
@@ -101,7 +101,7 @@ export default function Home() {
   };
   const onArrowButtonTouchStart = (direction: Direction) => {
     handleMove({
-      userID: playerIndex,
+      userID: userID,
       direction: 0,
       roomID: "1120",
     });
@@ -114,7 +114,7 @@ export default function Home() {
         <Header />
 
         <Controller
-          playerIndex={playerIndex}
+          userID={userID}
           bubbles={bubbles}
           onMainButtonTouchStart={onMainButtonTouchStart}
           onMainButtonTouchEnd={onMainButtonTouchEnd}

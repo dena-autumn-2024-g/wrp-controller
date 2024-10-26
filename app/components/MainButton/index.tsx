@@ -3,15 +3,15 @@ import styles from "./component.module.css";
 import { PLAYER_COLORS } from "@/app/const";
 
 export default function MainButton({
-  playerIndex,
+  userID,
   onTouchStart,
   onTouchEnd,
 }: {
-  playerIndex: number;
+  userID: number;
   onTouchStart: () => void;
   onTouchEnd: () => void;
 }) {
-  const { color, shadowColor } = PLAYER_COLORS[playerIndex];
+  const { color, shadowColor } = PLAYER_COLORS[userID];
 
   return (
     <div className={styles.container}>
