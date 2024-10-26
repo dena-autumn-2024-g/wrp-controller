@@ -1,18 +1,9 @@
-"use client"; // src/app/page.tsx
+"use client";
 import { useState } from "react";
 import { createPromiseClient } from "@connectrpc/connect";
 import { createConnectTransport } from "@connectrpc/connect-web";
 
-// GameService のインポート
 import { GameService } from "@/src/gen/protobuf/game_connect";
-
-// 接続先エンドポイントを設定
-const transport = createConnectTransport({
-  baseUrl: process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000",
-});
-
-// クライアントの作成
-const client = createPromiseClient(GameService, transport);
 
 import styles from "./page.module.css";
 import Loading from "@/app/components/Loading";
@@ -22,15 +13,16 @@ import useGame from "@/app/hooks/useGame";
 import Direction from "@/app/types/Direction";
 import type Bubble from "@/app/types/Bubble";
 
+// 接続先エンドポイントを設定
+const transport = createConnectTransport({
+  baseUrl: process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000",
+});
+
+// クライアントの作成
+const client = createPromiseClient(GameService, transport);
+
 export default function Home() {
   const { isLoading, error, playerIndex } = useGame();
-  const [inputValue, setInputValue] = useState("hogehoge");
-  const [messages, setMessages] = useState<
-    {
-      fromMe: boolean;
-      message: string;
-    }[]
-  >([]);
 
   const [bubbles, setBubbles] = useState<Bubble[]>([]); // 泡の状態を管理
 
