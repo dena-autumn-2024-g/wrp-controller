@@ -31,18 +31,23 @@ export default function useGame(gameClient: any, roomClient: any) {
       }
     };
 
-    const registerPlayer = async (roomID: string, serverName: string) => {
-      // const response = await fetch(
-      //   `https://api.sample.com/register?roomID=${roomID}&serverName=${serverName}`
-      // );
-      // const data = await response.json();
-      // console.log("registerPlayer", data);
-      console.log(`[registerPlayer] roomID:${roomID} serverName:${serverName}`);
-      const data = { userID: 1 };
-      const userID = data.userID;
-      localStorage.setItem("roomID", roomID);
-      localStorage.setItem("userID", userID.toString());
-      return userID;
+    const registerPlayer = async (roomID: string, _serverName: string) => {
+      try {
+        const request = {
+          roomId: roomID,
+          // serverName: serverName,
+        };
+        const response = await roomClient.joinRoom(request);
+        console.log("Register Player Response:", response);
+        const userID = response.userId;
+        localStorage.setItem("roomID", roomID);
+        localStorage.setItem("userID", userID.toString());
+        return userID;
+      } catch (error) {
+        console.error("Error calling checkGameAlive:", error);
+        setError("Error calling checkGameAlive");
+        return null;
+      }
     };
 
     const initialize = async () => {
@@ -78,6 +83,7 @@ export default function useGame(gameClient: any, roomClient: any) {
         : null;
 
       if (storedRoomID === paramRoomID && storedUserID !== null) {
+        console.log("User already registered");
         setRoomID(paramRoomID);
         setServerName(paramServerName);
         setUserID(storedUserID);
@@ -90,7 +96,7 @@ export default function useGame(gameClient: any, roomClient: any) {
         paramServerName,
       );
 
-      if (!fetchedPlayerID) {
+      if (fetchedPlayerID === null) {
         setIsLoading(false);
         setError("Failed to register player");
         return;
