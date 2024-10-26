@@ -92,35 +92,6 @@ export default function Home() {
     }
   };
 
-  // const handleClick = async (
-  //   e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  // ) => {
-  //   e.preventDefault();
-  //   // Clear inputValue since the user has submitted.
-  //   setInputValue("");
-  //   // Store the inputValue in the chain of messages and
-  //   // mark this message as coming from "me"
-  //   setMessages((prev) => [
-  //     ...prev,
-  //     {
-  //       fromMe: true,
-  //       message: inputValue,
-  //     },
-  //   ]);
-  //   const response = await client.say({
-  //     sentence: inputValue,
-  //   });
-  //   setMessages((prev) => [
-  //     ...prev,
-  //     {
-  //       fromMe: false,
-  //       message: response.sentence,
-  //     },
-  //   ]);
-
-  //   console.log(response);
-  // };
-
   const onMainButtonTouchStart = () => {
     pushBubbles();
     console.log("onMainButtonTouchStart");
@@ -154,14 +125,6 @@ export default function Home() {
             onArrowButtonTouchStart(Direction.Right)
           }
         />
-        {/* <button onClick={handleClick}>push</button>
-        <ol>
-          {messages.map((msg, index) => (
-            <li key={index}>
-              {`${msg.fromMe ? "ME:" : "ELIZA:"} ${msg.message}`}
-            </li>
-          ))}
-        </ol> */}
       </main>
     </div>
   );
