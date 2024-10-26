@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./component.module.css";
 
-export default function Button({ onClick }: { onClick: () => void }) {
+export default function MainButton({ onClick }: { onClick: () => void }) {
   return (
     <div className={styles.container}>
       <button className={styles.button} onClick={onClick}>
