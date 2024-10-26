@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./component.module.css";
 import MainButton from "@/app/components/MainButton";
 import ArrowButton from "../ArrowButton";
+import DisplayPlayerName from "../DisplayPlayerName";
 
 export default function Controller() {
   return (
@@ -19,6 +20,7 @@ export default function Controller() {
             direction="right"
           />
         </div>
+        <DisplayPlayerName playerName="Player1" />
       </div>
     </div>
   );

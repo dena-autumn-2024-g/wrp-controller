@@ -1,0 +1,17 @@
+/* component.module.css */
+.container {
+  width: 90%;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.playerName {
+  width: 100%;
+  color: white;
+  font-size: 3rem;
+  font-size: 3rem;
+  margin: 0;
+  box-sizing: border-box;
+  text-align: center;
+  background-color: var(--gray-dark);
+}

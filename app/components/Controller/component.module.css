@@ -1,16 +1,18 @@
 .container {
   min-width: 100vw;
   min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 2fr 3fr;
+  display: flex;
+  flex-direction: column;
 }
 
 .water {
   position: relative;
+  flex-grow: 1;
 }
 
 .controller {
+  padding-top: 60px;
+  padding-bottom: 40px;
   background-color: var(--gray-light);
   display: flex;
   flex-direction: column;
