@@ -1,0 +1,39 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  image:
+    name: Build Docker Image
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - uses: actions/checkout@v4
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: ${{ vars.REGION }}
+          role-to-assume: ${{ vars.ROLE_ARN }}
+      - name: Log in to GitHub Docker Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: dena-autumn-2024-g
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          platforms: linux/amd64
+          tags: |
+            ghcr.io/dena-autumn-2024-g/wrp-controller:latest
+            ghcr.io/dena-autumn-2024-g/wrp-controller:${{ github.sha }}
+
+      - name: Force new deployment and wait for services stability in ECS
+        run: |
+          aws ecs update-service --cluster ${{ vars.CLUSTER_NAME }} --service ${{ vars.SERVICE_NAME }} --force-new-deployment
+          aws ecs wait services-stable --cluster ${{ vars.CLUSTER_NAME }} --service ${{ vars.SERVICE_NAME }}
+          aws ecs describe-services --cluster ${{ vars.CLUSTER_NAME }} --service ${{ vars.SERVICE_NAME }}
