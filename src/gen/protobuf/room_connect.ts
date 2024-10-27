@@ -4,6 +4,8 @@
 // @ts-nocheck
 
 import {
+  CheckLivenessRequest,
+  CheckLivenessResponse,
   CloseRoomRequest,
   CloseRoomResponse,
   CreateRoomRequest,
@@ -12,7 +14,6 @@ import {
   JoinRoomResponse,
   WaitForUserJoinRequest,
   WaitForUserJoinResponse,
-  // TODO: ts.jsが間違っている
 } from "./room_pb.ts";
 import { MethodKind } from "@bufbuild/protobuf";
 
@@ -64,6 +65,15 @@ export const RoomService = {
       name: "CloseRoom",
       I: CloseRoomRequest,
       O: CloseRoomResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc water_ring.RoomService.CheckLiveness
+     */
+    checkLiveness: {
+      name: "CheckLiveness",
+      I: CheckLivenessRequest,
+      O: CheckLivenessResponse,
       kind: MethodKind.Unary,
     },
   },

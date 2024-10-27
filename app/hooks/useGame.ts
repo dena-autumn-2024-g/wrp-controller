@@ -17,12 +17,10 @@ export default function useGame(gameClient: any, roomClient: any) {
       try {
         const request = {
           roomId: roomID,
-          serverName: serverName,
         };
-        console.log("Check Game Alive Request:", request);
+        // console.log("Check Game Alive Request:", request);
         // TODO: checkGameAliveメソッドを作る
-        // const response = await gameClient.checkGameAlive(request);
-        const response = { isAlive: true };
+        const response = await roomClient.checkLiveness(request);
         console.log("Check Game Alive Response:", response);
         const isAlive = response.isAlive;
 

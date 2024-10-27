@@ -430,3 +430,105 @@ export class CloseRoomResponse extends Message<CloseRoomResponse> {
     return proto3.util.equals(CloseRoomResponse, a, b);
   }
 }
+
+/**
+ * @generated from message water_ring.CheckLivenessRequest
+ */
+export class CheckLivenessRequest extends Message<CheckLivenessRequest> {
+  /**
+   * ルームID
+   *
+   * @generated from field: string room_id = 1;
+   */
+  roomId = "";
+
+  constructor(data?: PartialMessage<CheckLivenessRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "water_ring.CheckLivenessRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "room_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(
+    bytes: Uint8Array,
+    options?: Partial<BinaryReadOptions>,
+  ): CheckLivenessRequest {
+    return new CheckLivenessRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(
+    jsonValue: JsonValue,
+    options?: Partial<JsonReadOptions>,
+  ): CheckLivenessRequest {
+    return new CheckLivenessRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(
+    jsonString: string,
+    options?: Partial<JsonReadOptions>,
+  ): CheckLivenessRequest {
+    return new CheckLivenessRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(
+    a: CheckLivenessRequest | PlainMessage<CheckLivenessRequest> | undefined,
+    b: CheckLivenessRequest | PlainMessage<CheckLivenessRequest> | undefined,
+  ): boolean {
+    return proto3.util.equals(CheckLivenessRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message water_ring.CheckLivenessResponse
+ */
+export class CheckLivenessResponse extends Message<CheckLivenessResponse> {
+  /**
+   * 部屋が生きているかどうか
+   *
+   * @generated from field: bool is_alive = 1;
+   */
+  isAlive = false;
+
+  constructor(data?: PartialMessage<CheckLivenessResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "water_ring.CheckLivenessResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "is_alive", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ]);
+
+  static fromBinary(
+    bytes: Uint8Array,
+    options?: Partial<BinaryReadOptions>,
+  ): CheckLivenessResponse {
+    return new CheckLivenessResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(
+    jsonValue: JsonValue,
+    options?: Partial<JsonReadOptions>,
+  ): CheckLivenessResponse {
+    return new CheckLivenessResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(
+    jsonString: string,
+    options?: Partial<JsonReadOptions>,
+  ): CheckLivenessResponse {
+    return new CheckLivenessResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(
+    a: CheckLivenessResponse | PlainMessage<CheckLivenessResponse> | undefined,
+    b: CheckLivenessResponse | PlainMessage<CheckLivenessResponse> | undefined,
+  ): boolean {
+    return proto3.util.equals(CheckLivenessResponse, a, b);
+  }
+}

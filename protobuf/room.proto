@@ -35,6 +35,14 @@ message JoinRoomResponse {
 
 message CloseRoomResponse {};
 
+message CheckLivenessRequest {
+  string room_id = 1; // ルームID
+};
+
+message CheckLivenessResponse {
+  bool is_alive = 1; // 部屋が生きているかどうか
+};
+
 // サービス定義
 service RoomService {
   // 部屋を作成
@@ -48,4 +56,6 @@ service RoomService {
 
   // 部屋を閉じる
   rpc CloseRoom(CloseRoomRequest) returns (CloseRoomResponse);
+
+  rpc CheckLiveness(CheckLivenessRequest) returns (CheckLivenessResponse);
 }
