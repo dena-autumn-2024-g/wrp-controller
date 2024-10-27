@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Direction } from "@/src/gen/protobuf/game_pb";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function useGame(gameClient: any, roomClient: any) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -18,6 +19,7 @@ export default function useGame(gameClient: any, roomClient: any) {
           roomId: roomID,
           serverName: serverName,
         };
+        console.log("Check Game Alive Request:", request);
         // TODO: checkGameAliveメソッドを作る
         // const response = await gameClient.checkGameAlive(request);
         const response = { isAlive: true };
@@ -31,7 +33,7 @@ export default function useGame(gameClient: any, roomClient: any) {
       }
     };
 
-    const registerPlayer = async (roomID: string, _serverName: string) => {
+    const registerPlayer = async (roomID: string) => {
       try {
         const request = {
           roomId: roomID,
@@ -91,10 +93,7 @@ export default function useGame(gameClient: any, roomClient: any) {
         return;
       }
 
-      const fetchedPlayerID = await registerPlayer(
-        paramRoomID,
-        paramServerName,
-      );
+      const fetchedPlayerID = await registerPlayer(paramRoomID);
 
       if (fetchedPlayerID === null) {
         setIsLoading(false);
@@ -109,7 +108,15 @@ export default function useGame(gameClient: any, roomClient: any) {
     };
 
     initialize();
-  }, [setIsLoading, setError, setRoomID, setServerName, setUserID]);
+  }, [
+    setIsLoading,
+    setError,
+    setRoomID,
+    setServerName,
+    setUserID,
+    gameClient,
+    roomClient,
+  ]);
 
   const handleMove = async ({
     userID,
