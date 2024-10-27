@@ -6,14 +6,11 @@ export default function useGame(gameClient: any, roomClient: any) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [roomID, setRoomID] = useState<string | null>(null);
-  const [serverName, setServerName] = useState<string | null>(null);
   const [userID, setUserID] = useState<number | null>(null);
-  console.log(
-    `[useGame] roomID:${roomID} serverName:${serverName} userID:${userID}`,
-  );
+  console.log(`[useGame] roomID:${roomID} userID:${userID}`);
 
   useEffect(() => {
-    const checkGameIsAlive = async (roomID: string, serverName: string) => {
+    const checkGameIsAlive = async (roomID: string) => {
       try {
         const request = {
           roomId: roomID,
@@ -35,7 +32,6 @@ export default function useGame(gameClient: any, roomClient: any) {
       try {
         const request = {
           roomId: roomID,
-          // serverName: serverName,
         };
         const response = await roomClient.joinRoom(request);
         console.log("Register Player Response:", response);
@@ -53,22 +49,15 @@ export default function useGame(gameClient: any, roomClient: any) {
     const initialize = async () => {
       const url = new URL(window.location.href);
       const paramRoomID = url.searchParams.get("roomID") || null;
-      const paramServerName = url.searchParams.get("serverName") || null;
       console.log("paramRoomID", paramRoomID);
-      console.log("paramServerName", paramServerName);
 
       if (paramRoomID === null) {
         setIsLoading(false);
         setError("roomID is required");
         return;
       }
-      if (paramServerName === null) {
-        setIsLoading(false);
-        setError("serverName is required");
-        return;
-      }
 
-      const isGameAlive = await checkGameIsAlive(paramRoomID, paramServerName);
+      const isGameAlive = await checkGameIsAlive(paramRoomID);
       if (!isGameAlive) {
         setIsLoading(false);
         setError("Game is not alive");
@@ -85,7 +74,6 @@ export default function useGame(gameClient: any, roomClient: any) {
       if (storedRoomID === paramRoomID && storedUserID !== null) {
         console.log("User already registered");
         setRoomID(paramRoomID);
-        setServerName(paramServerName);
         setUserID(storedUserID);
         setIsLoading(false);
         return;
@@ -100,21 +88,12 @@ export default function useGame(gameClient: any, roomClient: any) {
       }
 
       setRoomID(paramRoomID);
-      setServerName(paramServerName);
       setUserID(fetchedPlayerID);
       setIsLoading(false);
     };
 
     initialize();
-  }, [
-    setIsLoading,
-    setError,
-    setRoomID,
-    setServerName,
-    setUserID,
-    gameClient,
-    roomClient,
-  ]);
+  }, [setIsLoading, setError, setRoomID, setUserID, gameClient, roomClient]);
 
   const handleMove = async ({
     userID,
