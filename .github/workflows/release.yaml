@@ -26,4 +26,5 @@ jobs:
           path: ./out
           destination: ${{ vars.BUCKET }}
           parent: false
-          headers: '{"Cache-Control": "public, max-age=31536000"}'
+          headers: |-
+            cache-control: "public, max-age=31536000"
