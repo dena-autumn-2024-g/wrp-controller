@@ -16,7 +16,7 @@ import { Direction } from "@/src/gen/protobuf/game_pb";
 
 // 接続先エンドポイントを設定
 const transport = createConnectTransport({
-  baseUrl: process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000",
+  baseUrl: "/",
 });
 
 // クライアントの作成
